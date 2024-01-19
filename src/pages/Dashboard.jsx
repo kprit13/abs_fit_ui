@@ -18,11 +18,11 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 const Dashboard = () => {
-  useEffect(() => {
-    api('GET', 'catalog/product/listproducts?page=0&size=3').then((resp) => {
-      console.log(resp);
-    });
-  }, []);
+  // useEffect(() => {
+  //   api('GET', 'catalog/product/listproducts?page=0&size=3').then((resp) => {
+  //     console.log(resp);
+  //   });
+  // }, []);
   return (
     <>
       <Carousel />
