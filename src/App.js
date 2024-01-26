@@ -7,17 +7,18 @@ import MainRouter from './routers/MainRouter';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from './components/Footer';
 import { Box } from '@mui/material';
+import Navigation from './components/nav/Navigation';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppHeader/>
-      <Box sx={{ marginTop: '128px'}}>
       <Router>
+        <AppHeader />
+        <Navigation />
         <MainRouter />
       </Router>
-      </Box>
+      
       <Footer />
     </ThemeProvider>
   );

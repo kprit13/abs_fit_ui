@@ -32,8 +32,11 @@ import {
   Collapse,
   ListItemButton,
   ListItemText,
+	Hidden,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import MobileNavigationDrawer from './nav/MobileNavigationDrawer';
+import { Search, SearchIconWrapper, StyledInputBase } from './Search';
 
 const Search = styled("div")(({ theme }) => ({
   position: "absolute",
@@ -141,6 +144,7 @@ export default function PrimarySearchAppBar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [navIndex, setNavIndex] = React.useState(null);
+	const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const open = Boolean(anchorEl);
   const isMobile = useMediaQuery("(max-width: 600px)");
 
@@ -178,24 +182,28 @@ export default function PrimarySearchAppBar() {
   };
 
   const theme = useTheme();
+  const drawerButtonRef = React.useRef(null);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ bgcolor: "whitesmoke", top: 0 }}>
+	    <AppBar position='sticky' sx={{ bgcolor: 'whitesmoke' }}>
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            {isMobile ? (
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                sx={{ mr: 2, alignItems: "left" }}
-                onClick={() => handleDrawerOpen()}
-              >
+            <Hidden mdUp>
+	            <IconButton
+		            size='large'
+		            ref={drawerButtonRef}
+		            edge='start'
+		            color='inherit'
+		            aria-label='open drawer'
+		            sx={{ mr: 2, alignItems: 'left' }}
+		            onClick={() => handleDrawerOpen()}
+		            aria-label='menu'
+		            onClick={() => setIsDrawerOpen(true)}
+	            >
                 <MenuIcon />
               </IconButton>
-            ) : null}
+            </Hidden>
             <Box
               component="img"
               sx={{
@@ -242,9 +250,26 @@ export default function PrimarySearchAppBar() {
             </Box>
           </Toolbar>
         </Container>
+        <Drawer
+          anchor='left'
+          open={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+        >
+          <Box
+            sx={{
+              width: 250,
+              padding: 2,
+            }}
+          >
+            <Typography variant='h6' component='div' gutterBottom>
+              Menu
+            </Typography>
+            <MobileNavigationDrawer setIsDrawerOpen={setIsDrawerOpen} />
+          </Box>
+        </Drawer>
       </AppBar>
       <Divider />
-      <AppBar position="fixed" sx={{ bgcolor: "white", top: "64px" }}>
+	    {/*<AppBar position="fixed" sx={{ bgcolor: "white", top: "64px" }}>
         <Container maxWidth="xl">
           <Toolbar>
             {isMobile ? (
@@ -379,7 +404,7 @@ export default function PrimarySearchAppBar() {
             </List>
           </Drawer>
         </Container>
-      </AppBar>
+      </AppBar> */}
     </Box>
   );
 }
