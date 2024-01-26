@@ -366,7 +366,7 @@ MEDIA QUERIES
     width: 100%;
     border-bottom: 2px solid var(--mainColor);
   }
-
+}
 body,
 :root {
   font-family: 'Open Sans', sans-serif;

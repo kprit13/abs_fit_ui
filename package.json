@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.5",
     "lodash": "^4.17.21",
-      "lucide-react": "^0.315.0",
+    "lucide-react": "^0.315.0",
     "moment-timezone": "^0.5.44",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -32,61 +32,11 @@ import {
   Collapse,
   ListItemButton,
   ListItemText,
-	Hidden,
+  Hidden,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import MobileNavigationDrawer from './nav/MobileNavigationDrawer';
-import { Search, SearchIconWrapper, StyledInputBase } from './Search';
-
-const Search = styled("div")(({ theme }) => ({
-  position: "absolute",
-  left: "50%",
-  transform: "translateX(-50%)",
-  display: "flex",
-  alignItems: "center",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
-  },
-  marginLeft: theme.spacing(2),
-  width: "100%",
-  [theme.breakpoints.up("xs")]: {
-    marginLeft: 0,
-    width: "350px",
-  },
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-  [theme.breakpoints.up("md")]: {
-    width: "400px", // Adjusted width for screens larger than 'sm'
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import MobileNavigationDrawer from "./nav/MobileNavigationDrawer";
+import { Search, SearchIconWrapper, StyledInputBase } from "./Search";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -144,7 +94,7 @@ export default function PrimarySearchAppBar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [navIndex, setNavIndex] = React.useState(null);
-	const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const open = Boolean(anchorEl);
   const isMobile = useMediaQuery("(max-width: 600px)");
 
@@ -186,21 +136,21 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-	    <AppBar position='sticky' sx={{ bgcolor: 'whitesmoke' }}>
+      <AppBar position="sticky" sx={{ bgcolor: "whitesmoke" }}>
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Hidden mdUp>
-	            <IconButton
-		            size='large'
-		            ref={drawerButtonRef}
-		            edge='start'
-		            color='inherit'
-		            aria-label='open drawer'
-		            sx={{ mr: 2, alignItems: 'left' }}
-		            onClick={() => handleDrawerOpen()}
-		            aria-label='menu'
-		            onClick={() => setIsDrawerOpen(true)}
-	            >
+              <IconButton
+                size="large"
+                ref={drawerButtonRef}
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                sx={{ mr: 2, alignItems: "left" }}
+                onClick={() => handleDrawerOpen()}
+                aria-label="menu"
+                onClick={() => setIsDrawerOpen(true)}
+              >
                 <MenuIcon />
               </IconButton>
             </Hidden>
@@ -251,7 +201,7 @@ export default function PrimarySearchAppBar() {
           </Toolbar>
         </Container>
         <Drawer
-          anchor='left'
+          anchor="left"
           open={isDrawerOpen}
           onClose={() => setIsDrawerOpen(false)}
         >
@@ -261,7 +211,7 @@ export default function PrimarySearchAppBar() {
               padding: 2,
             }}
           >
-            <Typography variant='h6' component='div' gutterBottom>
+            <Typography variant="h6" component="div" gutterBottom>
               Menu
             </Typography>
             <MobileNavigationDrawer setIsDrawerOpen={setIsDrawerOpen} />
@@ -269,7 +219,7 @@ export default function PrimarySearchAppBar() {
         </Drawer>
       </AppBar>
       <Divider />
-	    {/*<AppBar position="fixed" sx={{ bgcolor: "white", top: "64px" }}>
+      {/*<AppBar position="fixed" sx={{ bgcolor: "white", top: "64px" }}>
         <Container maxWidth="xl">
           <Toolbar>
             {isMobile ? (
