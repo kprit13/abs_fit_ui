@@ -181,7 +181,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "whitesmoke" }}>
+      <AppBar position="fixed" sx={{ bgcolor: "whitesmoke", top: 0 }}>
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             {isMobile ? (
@@ -244,7 +244,7 @@ export default function PrimarySearchAppBar() {
         </Container>
       </AppBar>
       <Divider />
-      <AppBar position="static" sx={{ bgcolor: "white" }}>
+      <AppBar position="fixed" sx={{ bgcolor: "white", top: "64px" }}>
         <Container maxWidth="xl">
           <Toolbar>
             {isMobile ? (
@@ -348,6 +348,7 @@ export default function PrimarySearchAppBar() {
                 return (
                   <>
                     <ListItemButton
+                      key={index}
                       onClick={(event) => handleClick(event, index)}
                     >
                       <ListItemText primary={item.key} />
@@ -362,6 +363,7 @@ export default function PrimarySearchAppBar() {
                         {item.values.map((value) => {
                           return (
                             <ListItemButton
+                              key={value}
                               sx={{ pl: 4 }}
                               onClick={() => handleDrawerClose()}
                             >

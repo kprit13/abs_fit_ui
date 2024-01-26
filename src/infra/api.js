@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 const api = axios.create({
   baseURL: 'http://product-catalog-kaay.com',
@@ -6,20 +7,24 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-      return config;
-    }
+    const storedToken = JSON.parse(localStorage.getItem('accessToken') || '{}');
+  const isValidToken = storedToken.expiresAt && moment(storedToken.expiresAt, "DD-MM-YYYY HH:mm:ss").isAfter(moment());
+  ;
+
+  if (isValidToken) {
+    config.headers.Authorization = `Bearer ${storedToken.accessToken}`;
+  } else {
     try {
       const response = await getToken();
-      const newToken = response.data.access_token;
-      localStorage.setItem('accessToken', newToken);
+      const newToken = response.data;
+      const expiresAt = moment().add(1, 'hours').format('DD-MM-YYYY HH:mm:ss');
+      localStorage.setItem('accessToken', JSON.stringify({ accessToken: newToken, expiresAt }));
       config.headers.Authorization = `Bearer ${newToken}`;
-      return config;
     } catch (error) {
       throw error;
     }
+  }
+  return config;
   },
   (error) => {
     console.error('Request error:', error);
@@ -30,20 +35,13 @@ api.interceptors.request.use(
 const getToken = async () => {
   const reposne = await axios
     .post(
-      'https://dev-8wk0ywxqn0gks4hm.us.auth0.com/oauth/' + 'token',
+      'http://auth-service-kaay.com/' + 'generateToken',
       {
-        grant_type: 'password',
-        username: 'keshav05041992@gmail.com',
-        password: 'Infy@123',
-        audience: 'product-catalog-kaay.com',
-        scope: 'openid profile email',
-        client_id: 'oEAgGSN34h75Hu8Bz2DFzsyR65nsj6ly',
-        client_secret:
-          'OaQvoKciMpHOELFTXQnXik5W0E2AcX6xZpEWICMBjL-CNsIGpBKDvgrnPIR3VxiX',
+        "appID": "c856fcbb-8933-4e0b-85d1-80eb0586cd83"
       },
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
       }
     )
