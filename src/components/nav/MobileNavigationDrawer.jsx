@@ -1,6 +1,8 @@
+import React from "react";
 import { useState, useRef, useEffect } from 'react';
-import { X } from 'lucide-react';
+import CloseIcon from '@mui/icons-material/Close';
 import MegaMenu from './MegaMenu';
+import {Typography} from '@mui/material'
 
 const MobileNavigationDrawer = ({
   isDrawerOpen,
@@ -14,13 +16,10 @@ const MobileNavigationDrawer = ({
     if (clicked === index) {
       return setClicked(null);
     }
-
     setClicked(index);
   };
-
   useEffect(() => {
     if (isDrawerOpen && drawerRef.current) {
-      // Focus the drawer when it opens
       drawerRef.current.focus();
     }
   }, [isDrawerOpen]);
@@ -28,7 +27,6 @@ const MobileNavigationDrawer = ({
   const handleKeyDown = (event) => {
     if (event.key === 'Escape') {
       setIsDrawerOpen(false);
-      // Focus the drawer button when it closes
       if (drawerButtonRef.current) {
         drawerButtonRef.current.focus();
       }
@@ -46,7 +44,7 @@ const MobileNavigationDrawer = ({
         <div className='backdrop' onClick={() => setIsDrawerOpen(false)}></div>
       )}
 
-      <div className={`drawer_content ${isDrawerOpen ? 'active' : ''}`}>
+      <div className={`drawer_content ${isDrawerOpen ? 'active' : ''}`} sx={{justifyContent:'space-between'}}>
         <div className='close_drawer'>
           <button
             onClick={() => {
@@ -56,7 +54,7 @@ const MobileNavigationDrawer = ({
               }
             }}
           >
-            <X size={30} />
+            <CloseIcon/>
           </button>
         </div>
         <div>
