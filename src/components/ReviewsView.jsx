@@ -1,26 +1,26 @@
-import { styled } from '@mui/system';
-import Rating from '@mui/material/Rating';
+import { styled } from "@mui/system";
+import Rating from "@mui/material/Rating";
 
-const StarContainer = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
+const StarContainer = styled("div")({
+  display: "flex",
+  alignItems: "center",
 });
 
 const CustomRating = styled(Rating)(({ theme }) => ({
   color: theme.palette.primary.main, // Light blue color
-  marginRight: '4px',
+  marginRight: "4px",
 }));
 
-const Text = styled('div')(({ theme }) => ({
-  color: '#1a181e',
-  fontSize: '12px!important',
-  lineHeight: '16px!important',
-  fontWeight: 'bold',
-  zIndex: 999,
-  [theme.breakpoints.up('lg')]: {
-    fontSize: '14px!important',
-    lineHeight: '20px!important',
-    marginLeft: '6px',
+const Text = styled("div")(({ theme }) => ({
+  color: "#1a181e",
+  fontSize: "12px!important",
+  lineHeight: "16px!important",
+  fontWeight: "bold",
+  zIndex: 998,
+  [theme.breakpoints.up("lg")]: {
+    fontSize: "14px!important",
+    lineHeight: "20px!important",
+    marginLeft: "6px",
   },
 }));
 
@@ -36,7 +36,7 @@ const RatingStars = ({ rating, count }) => {
 const ReviewsView = (props) => {
   const { rating, count } = props;
   return (
-    <div style={{ marginLeft: '20px' }}>
+    <div style={{ marginLeft: "20px" }}>
       <RatingStars rating={4.6} count={50} />
     </div>
   );

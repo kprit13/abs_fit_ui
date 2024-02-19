@@ -91,66 +91,32 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function PrimarySearchAppBar() {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [navIndex, setNavIndex] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const open = Boolean(anchorEl);
   const isMobile = useMediaQuery("(max-width: 600px)");
-
-  const handleClick = (event, index) => {
-    if (navIndex === index) {
-      setNavIndex(null);
-      setAnchorEl(null);
-    } else {
-      setNavIndex(index);
-      setAnchorEl(event.currentTarget);
-    }
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setNavIndex(null);
-    setAnchorEl(null);
-    setDrawerOpen(false);
-  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleDrawerItemClick = (event, index) => {
-    setNavIndex(index);
-    setAnchorEl(event.currentTarget);
-  };
-
-  const theme = useTheme();
   const drawerButtonRef = React.useRef(null);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky" sx={{ bgcolor: "whitesmoke" }}>
+    <>
+      <AppBar sx={{ top: 0 }}>
         <Container maxWidth="xl">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <IconButton
-                size="large"
-                ref={drawerButtonRef}
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                sx={{
-                  mr: 2,
-                  alignItems: "left",
-                  display: { md: 'none' }
-                }}
-                onClick={() => setIsDrawerOpen(true)}
+              size="large"
+              ref={drawerButtonRef}
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{
+                mr: 2,
+                alignItems: "left",
+                display: { md: "none" },
+              }}
+              onClick={() => setIsDrawerOpen(true)}
             >
               <MenuIcon />
             </IconButton>
@@ -164,8 +130,8 @@ export default function PrimarySearchAppBar() {
               alt="Your logo."
               src={Logo}
             />
-            {isMobile ? null :
-              <Search >
+            {isMobile ? null : (
+              <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -173,8 +139,9 @@ export default function PrimarySearchAppBar() {
                   placeholder="Search for Products..."
                   inputProps={{ "aria-label": "search" }}
                 />
-              </Search>}
-            
+              </Search>
+            )}
+
             {isMobile ? null : <Box sx={{ flexGrow: 1 }} />}
             <Box>
               <IconButton
@@ -211,12 +178,15 @@ export default function PrimarySearchAppBar() {
               padding: 2,
             }}
           >
-            <MobileNavigationDrawer isDrawerOpen ={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} drawerButtonRef={drawerButtonRef}/>
+            <MobileNavigationDrawer
+              isDrawerOpen={isDrawerOpen}
+              setIsDrawerOpen={setIsDrawerOpen}
+              drawerButtonRef={drawerButtonRef}
+            />
           </Box>
         </Drawer>
       </AppBar>
       <Divider />
-      
-    </Box>
+    </>
   );
 }

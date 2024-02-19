@@ -68,7 +68,7 @@ const Ribbon = styled("div")(({ theme }) => ({
   alignItems: "center",
   display: "flex",
   borderRadius: "0 0 12px!important",
-  zIndex: 999,
+  zIndex: 998,
   padding: "0 18px!important",
   fontWeight: "bold",
   [theme.breakpoints.up("lg")]: {
@@ -162,7 +162,7 @@ const ProductCard = ({ product }) => {
             <RibbonContainer>
               <StyledImage
                 src={
-                  "https://dukaan.b-cdn.net/700x700/webp/upload_file_service/f7cc6d82-6cd1-490f-922f-0b17bf8e0b25/1b46a7a6-9402-4645-8237-9d70e149a752-720x-1.webp"
+                  "https://absolute-health.blr1.digitaloceanspaces.com/products/b48e95f7-4e66-44bd-b24d-deb2f4af17fc/variants/2fc1d001-d243-45bd-83dc-fe7af9cf3ca8/ON_Protein_Front_View.jpg"
                 }
                 alt={"prod-img"}
               />

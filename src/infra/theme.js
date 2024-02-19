@@ -1,23 +1,23 @@
 // theme.js
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4CAF50', // Set your primary color
+      main: "#2C967B", // Set your primary color
     },
     secondary: {
-      main: '#FFEB3B', // Set your secondary color
+      main: "#f50057", // Set your secondary color
     },
     background: {
-      default: '#f0f0f0', // Set your default background color
+      default: "#FAFAFA", // Set your default background color
     },
     text: {
-      primary: '#333333', // Set your primary text color
+      primary: "#333333", // Set your primary text color
     },
   },
   typography: {
-    fontFamily: 'Montserrat, sans-serif', // Set your default font family
+    fontFamily: "Montserrat, sans-serif", // Set your default font family
   },
   breakpoints: {
     values: {

@@ -27,14 +27,14 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const fetchProducts = () => {
-    // api("GET", `catalog/product/listproducts?page=${page}&size=10`).then(
-    //   (resp) => {
-    //     const newProducts = resp.content;
-    //     dispatch(actions.SET_PRODUCTS(newProducts));
-    //     setPage((prevPage) => 0);
-    //     setHasMore(true);
-    //   }
-    // );
+    api("GET", `catalog/product/listproducts?page=${page}&size=10`).then(
+      (resp) => {
+        const newProducts = resp.content;
+        dispatch(actions.SET_PRODUCTS(newProducts));
+        setPage((prevPage) => 0);
+        setHasMore(true);
+      }
+    );
   };
 
   useEffect(() => {

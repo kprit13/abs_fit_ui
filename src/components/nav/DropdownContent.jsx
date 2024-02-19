@@ -1,13 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Typography } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const DropdownContent = ({ submenuscontent, setIsDrawerOpen, handleClick }) => {
   return (
-    <div className='dropdown_content'>
+    <div className="dropdown_content">
       {submenuscontent.map((item, index) => (
         <React.Fragment key={index}>
           <section>
-            <h4>{item.heading}</h4>
+            <Typography variant="h6" sx={{ color: "black" }}>
+              {item.heading}
+            </Typography>
             <ul>
               {item.submenu.map(({ label, href }, index) => (
                 <li
@@ -17,7 +20,11 @@ const DropdownContent = ({ submenuscontent, setIsDrawerOpen, handleClick }) => {
                     handleClick();
                   }}
                 >
-                  <Link to={href}>{label}</Link>
+                  <Link to={href}>
+                    <Typography variant="body2" sx={{ color: "black" }}>
+                      {label}
+                    </Typography>
+                  </Link>
                 </li>
               ))}
             </ul>
