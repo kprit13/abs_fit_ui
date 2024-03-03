@@ -27,12 +27,13 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const fetchProducts = () => {
+    dispatch(actions.RESET_PRODUCTS());
     api("GET", `catalog/product/listproducts?page=${page}&size=10`).then(
       (resp) => {
         const newProducts = resp.content;
         dispatch(actions.SET_PRODUCTS(newProducts));
-        setPage((prevPage) => 0);
-        setHasMore(true);
+        setPage((prevPage) => prevPage + 1);
+        setHasMore(false);
       }
     );
   };

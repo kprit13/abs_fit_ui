@@ -8,6 +8,8 @@ import ReviewsView from "./ReviewsView";
 import ProductModal from "./ProductModal";
 import _get from "lodash/get";
 import { CurrencyFormatter } from "../common/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../redux/slices/CartSlice";
 
 const Logo = styled((props) => {
   const { src } = props;
@@ -105,9 +107,28 @@ const Text = styled("p")(({ theme }) => ({
 const ProductCard = ({ product }) => {
   const [count, setCount] = React.useState(0);
   const { buyPrice, onSalePrice } = _get(product, "productVariants[0]");
+  const primaryImg = _get(product, "productVariants[0].imageUrlList[0]");
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.Cart);
+  const selectedProduct = cart.cartItems.find((item) => {
+    return item.productId === product.productId;
+  });
+  if (selectedProduct && count !== selectedProduct.quantity) {
+    setCount(selectedProduct.quantity);
+  }
 
   const getDiscount = () => {
     return 100 - Math.round((onSalePrice / buyPrice) * 100);
+  };
+
+  const addProductHandler = () => {
+    dispatch(
+      actions.ADD_PRODUCT_TO_CART({
+        productId: product.productId,
+        quantity: 1,
+      })
+    );
+    setCount(count + 1);
   };
 
   const getButtonView = () => {
@@ -117,21 +138,29 @@ const ProductCard = ({ product }) => {
           variant="contained"
           aria-label="outlined primary button group"
         >
-          <Button onClick={() => setCount(count - 1)}>-</Button>
+          <Button
+            onClick={() => {
+              dispatch(
+                actions.DELETE_PRODUCT_FROM_CART({
+                  productId: product.productId,
+                  quantity: 1,
+                  isDeleteProduct: false,
+                })
+              );
+              setCount(count - 1);
+            }}
+          >
+            -
+          </Button>
           <Box mx={2} display="flex" alignItems="center">
             {count}
           </Box>
-          <Button onClick={() => setCount(count + 1)}>+</Button>
+          <Button onClick={() => addProductHandler()}>+</Button>
         </ButtonGroup>
       );
     } else {
       return (
-        <Button
-          variant="contained"
-          onClick={() => {
-            setCount(count + 1);
-          }}
-        >
+        <Button variant="contained" onClick={() => addProductHandler()}>
           <b>Add</b>
         </Button>
       );
@@ -160,13 +189,7 @@ const ProductCard = ({ product }) => {
           />
           <CardMedia component="div">
             <RibbonContainer>
-              <StyledImage
-                src={
-                  "https://absolute-health.blr1.digitaloceanspaces.com/products/b48e95f7-4e66-44bd-b24d-deb2f4af17fc/variants/2fc1d001-d243-45bd-83dc-fe7af9cf3ca8/ON_Protein_Front_View.jpg"
-                }
-                alt={"prod-img"}
-              />
-
+              <StyledImage src={primaryImg} alt={"prod-img"} />
               <Ribbon>{`${getDiscount()}% OFF`}</Ribbon>
             </RibbonContainer>
             <ReviewsView />

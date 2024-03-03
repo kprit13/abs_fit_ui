@@ -37,6 +37,7 @@ import {
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import MobileNavigationDrawer from "./nav/MobileNavigationDrawer";
 import { Search, SearchIconWrapper, StyledInputBase } from "./Search";
+import { useSelector } from "react-redux";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -94,6 +95,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const cart = useSelector((state) => state.Cart);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -149,9 +151,13 @@ export default function PrimarySearchAppBar() {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={17} color="error">
+                {cart.count > 0 ? (
+                  <Badge badgeContent={cart.count} color="error">
+                    <ShoppingCartIcon />
+                  </Badge>
+                ) : (
                   <ShoppingCartIcon />
-                </Badge>
+                )}
               </IconButton>
               <IconButton
                 size="large"
