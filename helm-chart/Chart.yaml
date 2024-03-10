@@ -1,0 +1,4 @@
+apiVersion: v2
+name: absolutehealth-ui-ms
+description: Helm chart for absolutehealth-ui-ms
+version: 1.0.0-SNAPSHOT

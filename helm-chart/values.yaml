@@ -1,0 +1,8 @@
+app:
+  replicas: 1
+  name: absolutehealth-ui-ms
+  configPath: /app/config
+  port: 8090
+image:
+  repository: abw12/absolutehealth-ui-ms
+  tag: v1

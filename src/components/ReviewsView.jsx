@@ -36,7 +36,7 @@ const RatingStars = ({ rating, count }) => {
 const ReviewsView = (props) => {
   const { rating, count } = props;
   return (
-    <div style={{ marginLeft: "20px" }}>
+    <div style={{ marginLeft: "20px", marginTop: "20px" }}>
       <RatingStars rating={4.6} count={50} />
     </div>
   );

@@ -6,8 +6,6 @@ import { BrowserRouter as Router } from "react-router-dom/dist";
 import MainRouter from "./routers/MainRouter";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./components/Footer";
-import { Box } from "@mui/material";
-import Navigation from "./components/nav/Navigation";
 import CombinedHeader from "./components/CombinedHeader";
 
 function App() {
@@ -18,7 +16,6 @@ function App() {
         <CombinedHeader />
         <MainRouter />
       </Router>
-
       <Footer />
     </ThemeProvider>
   );

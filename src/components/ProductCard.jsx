@@ -10,6 +10,8 @@ import _get from "lodash/get";
 import { CurrencyFormatter } from "../common/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../redux/slices/CartSlice";
+import { actions as ProductActions } from "../redux/slices/ProductCatalogSlice";
+import { useNavigate } from "react-router-dom";
 
 const Logo = styled((props) => {
   const { src } = props;
@@ -110,6 +112,7 @@ const ProductCard = ({ product }) => {
   const primaryImg = _get(product, "productVariants[0].imageUrlList[0]");
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.Cart);
+  const navigate = useNavigate();
   const selectedProduct = cart.cartItems.find((item) => {
     return item.productId === product.productId;
   });
@@ -167,6 +170,11 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const clickHandler = () => {
+    dispatch(ProductActions.SET_SELECTED_PRODUCT(product.productId));
+    navigate(`/product/details`);
+  };
+
   return (
     <>
       <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -187,7 +195,11 @@ const ProductCard = ({ product }) => {
             }
             title={product.productName}
           />
-          <CardMedia component="div">
+          <CardMedia
+            component="div"
+            style={{ cursor: "pointer" }}
+            onClick={() => clickHandler()}
+          >
             <RibbonContainer>
               <StyledImage src={primaryImg} alt={"prod-img"} />
               <Ribbon>{`${getDiscount()}% OFF`}</Ribbon>
