@@ -4,9 +4,9 @@ metadata:
   name: absolutehealth-ui-ms
 spec:
   selector:
-    app: { { .Values.app.name } }
+    app: {{ .Values.app.name }}
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: { { .Values.app.port } }
+      port: 3000
+      targetPort: {{ .Values.app.port }}
   type: ClusterIP
